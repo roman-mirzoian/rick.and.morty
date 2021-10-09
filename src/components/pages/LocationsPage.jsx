@@ -23,16 +23,16 @@ const headCells = [
     label: "Name",
   },
   {
-    id: "episode",
+    id: "type",
     numeric: true,
     disablePadding: false,
-    label: "Episode",
+    label: "Type",
   },
   {
-    id: "air_date",
+    id: "dimension",
     numeric: true,
     disablePadding: false,
-    label: "Air date",
+    label: "Dimension",
   },
 ];
 
@@ -42,10 +42,10 @@ const EpisodesPage = () => {
   const [pagesCount, setPagesCount] = useState(0);
 
   useEffect(() => {
-    DataService.getEpisodes(page + 1).then(response => {
+    DataService.getLocations(page + 1).then(response => {
       setEpisodes(response);
     });
-    DataService.getUnitsCount('episode').then(count => {
+    DataService.getUnitsCount('location').then(count => {
       setPagesCount(count);
     })
   }, [page]);
@@ -53,7 +53,7 @@ const EpisodesPage = () => {
   return (
     <TablePage
       headCells={headCells}
-      baseOrderName={"episodes"}
+      baseOrderName={""}
       content={episodes}
       page={page}
       setPage={setPage}

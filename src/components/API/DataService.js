@@ -17,27 +17,30 @@ export default class DataService {
 
   static async getEpisodes(page) {
     try {
-      const response = await axios.get(`https://rickandmortyapi.com/api/episode/?page=${page + 1}`);
-      return response;
+      const response = await axios.get(`https://rickandmortyapi.com/api/episode/?page=${page}`);
+      return response.data.results;
     } catch (e) {
       console.log(e);
     }
   }
 
-  static async getLocations() {
+  static async getLocations(page) {
     try {
-      const response = await axios.get("https://rickandmortyapi.com/api/character");
-      return response;
+      const response = await axios.get(`https://rickandmortyapi.com/api/location/?page=${page}`);
+      return response.data.results;
     } catch (e) {
       console.log(e);
     }
   }
-  static async getCharactersCount() {
-    const response = await axios.get("https://rickandmortyapi.com/api/character");
+
+  static async getUnitsCount(target) {
+    const response = await axios.get(`https://rickandmortyapi.com/api/${target}`);
     return response.data.info.count;
   }
-  static async getCharactersPagesCount() {
-    const response = await axios.get("https://rickandmortyapi.com/api/character")
-    return response.data.info.pages;
+
+  static async getPagesCount(target) {
+    const response = await axios.get(`https://rickandmortyapi.com/api/${target}`);
+    const count = response.data.info.pages; 
+    return count;
   }
 }
