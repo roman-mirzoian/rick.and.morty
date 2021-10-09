@@ -7,7 +7,6 @@ export default class DataService {
     const gender = filter.gender ? `&gender=${filter.gender}` : '';
     const link = `https://rickandmortyapi.com/api/character/?page=${page}${species}${status}${gender}`;
 
-    console.log(link);
     try {
       const response = await axios.get(link);
       return response;
@@ -15,14 +14,16 @@ export default class DataService {
       console.log(e);
     }
   }
-  static async getEpisodes() {
+
+  static async getEpisodes(page) {
     try {
-      const response = await axios.get("https://rickandmortyapi.com/api/character");
+      const response = await axios.get(`https://rickandmortyapi.com/api/episode/?page=${page + 1}`);
       return response;
     } catch (e) {
       console.log(e);
     }
   }
+
   static async getLocations() {
     try {
       const response = await axios.get("https://rickandmortyapi.com/api/character");
