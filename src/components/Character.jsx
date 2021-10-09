@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 function Character({ props, onClick, fullInfo = false }) {
   if (!fullInfo) {
     return (
-      <Grid item xs={12} sm={6} md={4} onClick={() => onClick(props)}>
+      <Grid item xs={3} onClick={() => onClick(props)}>
         <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
           <CardMedia
             component="img"
@@ -26,9 +26,8 @@ function Character({ props, onClick, fullInfo = false }) {
             <Typography>Species: {props.species}</Typography>
             <Typography>Location: {props.location?.name}</Typography>
           </CardContent>
-          <CardActions>
-            <Button size="small">View</Button>
-            <Button size="small">Edit</Button>
+          <CardActions sx={{display: 'flex', justifyContent: 'center'}}>
+            <Button size="small">View info</Button>
           </CardActions>
         </Card>
       </Grid>

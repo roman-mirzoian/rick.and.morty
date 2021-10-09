@@ -1,17 +1,16 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 
 import DataService from "../API/DataService";
 import MySelect from "../UI/select/MySelect";
 import Loader from "../UI/Loader/Loader";
-import { getPagesArray } from "../../utils/pages";
 import MyModal from "../UI/modal/MyModal";
 
 import Character from "../Character";
+import { Pagination } from "@material-ui/core";
 
 const CharacterPage = () => {
   const [characters, setCharacters] = useState([]);
@@ -41,7 +40,8 @@ const CharacterPage = () => {
     setIsDataLoading(true);
   };
 
-  const changePage = (page) => {
+  const changePage = (event, page) => {
+    if (page == null) return;
     setCurrentPage(page);
     updatePage();
   };
@@ -66,7 +66,7 @@ const CharacterPage = () => {
     setModal(false);
   };
   return (
-    <Container sx={{ py: 8 }} maxWidth="md">
+    <Container sx={{ py: 8 }} maxWidth="lg">
       <MySelect
         onChange={(listName, option) => onSelectedFilters(listName, option)}
       />
@@ -81,8 +81,8 @@ const CharacterPage = () => {
           <Loader />
         </div>
       ) : (
-        <Grid container spacing={4}>
-          {characters.map((character, index) => (
+        <Grid container spacing={3}>
+          {characters.map((character) => (
             <Character
               key={character.id}
               props={character}
@@ -91,13 +91,18 @@ const CharacterPage = () => {
           ))}
         </Grid>
       )}
-      {getPagesArray(totalPagesCount).map((p) => {
-        return (
-          <Button key={p} onClick={() => changePage(p)}>
-            {p}
-          </Button>
-        );
-      })}
+      {characters.length >= 20 ? (
+        <Pagination
+          sx={{ mt: 2, display: "flex", justifyContent: "center" }}
+          count={totalPagesCount}
+          page={currentPage}
+          size="large"
+          variant="outlined"
+          shape="rounded"
+          onChange={changePage}
+        />
+      ) : null}
+
       <MyModal visible={modal} setVisible={setModal} info={modalInfo}>
         <Character
           key={modalInfo.id}
