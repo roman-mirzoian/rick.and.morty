@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { styled } from "@material-ui/core/styles";
 import TableCell, { tableCellClasses } from "@material-ui/core/TableCell";
 
-import TablePage from "./TablePage";
+import TablePage from "../UI/TablePage";
 import DataService from "../API/DataService";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

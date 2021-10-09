@@ -1,6 +1,5 @@
 import React from "react";
-
-import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 import Stack from "@material-ui/core/Stack";
 import Box from "@material-ui/core/Box";
@@ -33,10 +32,18 @@ const Tabs = () => {
           spacing={2}
           justifyContent="center"
         >
-          <Button variant="contained">Characters</Button>
-          <Button variant="outlined">Episodes</Button>
-          <Button variant="outlined">Locations</Button>
-          <Button variant="outlined">My watch list</Button>
+          <Link to="/characters" variant="contained">
+            Characters
+          </Link>
+          <Link to="/episodes" variant="outlined">
+            Episodes
+          </Link>
+          <Link to="/locations" variant="outlined">
+            Locations
+          </Link>
+          <Link to="/watch-list" variant="outlined">
+            My watch list
+          </Link>
         </Stack>
       </Container>
     </Box>

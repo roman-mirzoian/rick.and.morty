@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default class DataService {
-  static async getCharacters(filter, page = 1) {
+  static async getCharacters(filter, page) {
     const species = filter.species ? `&species=${filter.species}` : ''; 
     const status = filter.status ? `&status=${filter.status}` : ''; 
     const gender = filter.gender ? `&gender=${filter.gender}` : '';
@@ -9,7 +9,7 @@ export default class DataService {
 
     try {
       const response = await axios.get(link);
-      return response;
+      return response.data.results;
     } catch (e) {
       console.log(e);
     }
