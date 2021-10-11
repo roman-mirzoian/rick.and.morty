@@ -9,6 +9,7 @@ import ListItemButton from "@material-ui/core/ListItemButton";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
+import { Alert } from "@material-ui/core";
 
 const WatchList = ({ list, handleToggle, removeListItem }) => {
   return (
@@ -47,7 +48,9 @@ const WatchList = ({ list, handleToggle, removeListItem }) => {
         })
       ) : (
         <Container>
-          Please write the episode you want to watch later :)
+          <Alert severity="info">
+            Please write the episode you want to watch later :)
+          </Alert>
         </Container>
       )}
     </List>

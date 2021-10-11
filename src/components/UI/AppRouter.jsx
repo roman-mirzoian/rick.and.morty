@@ -6,6 +6,7 @@ import LocationsPage from "../pages/LocationsPage";
 import Navbar from "./navbar/Navbar";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import MyWatchList from "../pages/MyWatchList";
+import ErrorPage from "../pages/ErrorPage";
 
 function AppRouter() {
   return (
@@ -24,7 +25,10 @@ function AppRouter() {
         <Route path="/watch-list">
           <MyWatchList />
         </Route>
-        <Redirect to="/characters" />
+        <Route path="/error-page">
+          <ErrorPage />
+        </Route>
+        <Redirect to="/error-page" />
       </Switch>
     </BrowserRouter>
   );

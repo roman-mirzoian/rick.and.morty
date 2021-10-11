@@ -12,6 +12,7 @@ export default class DataService {
       return response.data.results;
     } catch (e) {
       console.log(e);
+      return e;
     }
   }
 

@@ -11,6 +11,7 @@ import MyModal from "../UI/modal/MyModal";
 
 import Character from "../Character";
 import { Pagination } from "@material-ui/core";
+import { Alert } from "@material-ui/core";
 
 const CharacterPage = () => {
   const [characters, setCharacters] = useState([]);
@@ -74,13 +75,14 @@ const CharacterPage = () => {
         <Loader />
       ) : (
         <Grid container spacing={3}>
-          {characters.map((character) => (
-            <Character
-              key={character.id}
-              props={character}
-              onClick={(info) => openModal(info)}
-            />
-          ))}
+          {Array.isArray(characters) &&
+            characters.map((character) => (
+              <Character
+                key={character.id}
+                props={character}
+                onClick={(info) => openModal(info)}
+              />
+            ))}
         </Grid>
       )}
       {characters.length >= 20 ? (
@@ -93,7 +95,11 @@ const CharacterPage = () => {
           shape="rounded"
           onChange={changePage}
         />
-      ) : null}
+      ) : (
+        <Alert severity="warning">
+          No results were found for the specified filters.
+        </Alert>
+      )}
 
       <MyModal visible={modal} setVisible={setModal} info={modalInfo}>
         <Character
