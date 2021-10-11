@@ -38,7 +38,7 @@ function Character({ props, onClick, fullInfo = false }) {
       return (
         <Grid item xs={12} sm={12} md={12}>
           <Card
-            sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+            sx={{ height: "100%", display: "flex", flexDirection: "column", boxShadow: 'none' }}
           >
             <CardMedia
               component="img"
