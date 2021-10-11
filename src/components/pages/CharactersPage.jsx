@@ -66,20 +66,12 @@ const CharacterPage = () => {
     setModal(false);
   };
   return (
-    <Container sx={{ py: 8 }} maxWidth="lg">
+    <Container sx={{ py: 2 }} maxWidth="lg">
       <MySelect
         onChange={(listName, option) => onSelectedFilters(listName, option)}
       />
       {isDataLoading ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "50px",
-          }}
-        >
-          <Loader />
-        </div>
+        <Loader />
       ) : (
         <Grid container spacing={3}>
           {characters.map((character) => (

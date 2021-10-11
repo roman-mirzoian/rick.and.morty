@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Stack from "@material-ui/core/Stack";
@@ -7,19 +7,36 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
+import { Button } from "@material-ui/core";
+
 const Tabs = () => {
+  const baseButtons = {
+    characters: 'outlined',
+    episodes: 'outlined',
+    locations: 'outlined',
+    ['my watch list']: 'outlined'
+  };
+  const [buttonVariants, setButtonVariants] = useState({...baseButtons});
+
+  const onButtonSelected = (variant) => {
+    const btn = variant.target.text.toLowerCase();
+    setButtonVariants({...baseButtons, [`${btn}`]: 'contained'});
+  }
+
+  useEffect(() => {
+    setButtonVariants({...baseButtons, characters: 'contained'});
+  }, [])
+
   return (
     <Box
       sx={{
         bgcolor: "background.paper",
-        pt: 8,
-        pb: 6,
+        py: 2,
       }}
     >
       <Container maxWidth="sm">
         <Typography
-          component="h1"
-          variant="h2"
+          variant="h4"
           align="center"
           color="text.primary"
           gutterBottom
@@ -27,23 +44,23 @@ const Tabs = () => {
           Select the section of interest
         </Typography>
         <Stack
-          sx={{ pt: 4 }}
+          sx={{ py: 2 }}
           direction="row"
           spacing={2}
           justifyContent="center"
         >
-          <Link to="/characters" variant="contained">
+          <Button component={Link} to="/characters" variant={buttonVariants.characters} onClick={onButtonSelected}>
             Characters
-          </Link>
-          <Link to="/episodes" variant="outlined">
+          </Button>
+          <Button component={Link} to="/episodes" variant={buttonVariants.episodes} onClick={onButtonSelected}>
             Episodes
-          </Link>
-          <Link to="/locations" variant="outlined">
+          </Button>
+          <Button component={Link} to="/locations" variant={buttonVariants.locations} onClick={onButtonSelected}>
             Locations
-          </Link>
-          <Link to="/watch-list" variant="outlined">
+          </Button>
+          <Button component={Link} to="/watch-list" variant={buttonVariants['my watch list']} onClick={onButtonSelected}>
             My watch list
-          </Link>
+          </Button>
         </Stack>
       </Container>
     </Box>

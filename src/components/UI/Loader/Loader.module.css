@@ -1,3 +1,9 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
 .loader {
   width: 100px;
   height: 100px;

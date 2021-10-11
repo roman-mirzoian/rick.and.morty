@@ -6,6 +6,7 @@ import TableCell, { tableCellClasses } from "@material-ui/core/TableCell";
 
 import TablePage from "../UI/TablePage";
 import DataService from "../API/DataService";
+import Loader from "../UI/Loader/Loader";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,26 +41,34 @@ const EpisodesPage = () => {
   const [episodes, setEpisodes] = useState([]);
   const [page, setPage] = React.useState(0);
   const [pagesCount, setPagesCount] = useState(0);
+  const [isDataLoading, setIsDataLoading] = useState(true);
 
   useEffect(() => {
-    DataService.getEpisodes(page + 1).then(response => {
+    DataService.getEpisodes(page + 1).then((response) => {
       setEpisodes(response);
+      setIsDataLoading(false);
     });
-    DataService.getUnitsCount('episode').then(count => {
+    DataService.getUnitsCount("episode").then((count) => {
       setPagesCount(count);
-    })
+    });
   }, [page]);
 
   return (
-    <TablePage
-      headCells={headCells}
-      baseOrderName={"episodes"}
-      content={episodes}
-      page={page}
-      setPage={setPage}
-      pagesCount={pagesCount}
-      StyledTableCell={StyledTableCell}
-    />
+    <div>
+      {isDataLoading ? (
+        <Loader />
+      ) : (
+        <TablePage
+          headCells={headCells}
+          baseOrderName={"episodes"}
+          content={episodes}
+          page={page}
+          setPage={setPage}
+          pagesCount={pagesCount}
+          StyledTableCell={StyledTableCell}
+        />
+      )}
+    </div>
   );
 };
 
