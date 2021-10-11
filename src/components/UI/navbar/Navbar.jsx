@@ -11,21 +11,23 @@ import { Button } from "@material-ui/core";
 
 const Tabs = () => {
   const baseButtons = {
-    characters: 'outlined',
-    episodes: 'outlined',
-    locations: 'outlined',
-    ['my watch list']: 'outlined'
+    characters: "outlined",
+    episodes: "outlined",
+    locations: "outlined",
+    "watch-list": "outlined",
   };
-  const [buttonVariants, setButtonVariants] = useState({...baseButtons});
+  const [buttonVariants, setButtonVariants] = useState({ ...baseButtons });
 
   const onButtonSelected = (variant) => {
-    const btn = variant.target.text.toLowerCase();
-    setButtonVariants({...baseButtons, [`${btn}`]: 'contained'});
-  }
+    let btn = variant.target.text.toLowerCase();
+    if (btn === "my watch list") btn = "watch-list";
+    setButtonVariants({ ...baseButtons, [`${btn}`]: "contained" });
+  };
 
   useEffect(() => {
-    setButtonVariants({...baseButtons, characters: 'contained'});
-  }, [])
+    let currentPath = window.location.pathname.slice(1);
+    setButtonVariants({ ...baseButtons, [`${currentPath}`]: "contained" });
+  }, []);
 
   return (
     <Box
@@ -49,16 +51,36 @@ const Tabs = () => {
           spacing={2}
           justifyContent="center"
         >
-          <Button component={Link} to="/characters" variant={buttonVariants.characters} onClick={onButtonSelected}>
+          <Button
+            component={Link}
+            to="/characters"
+            variant={buttonVariants.characters}
+            onClick={onButtonSelected}
+          >
             Characters
           </Button>
-          <Button component={Link} to="/episodes" variant={buttonVariants.episodes} onClick={onButtonSelected}>
+          <Button
+            component={Link}
+            to="/episodes"
+            variant={buttonVariants.episodes}
+            onClick={onButtonSelected}
+          >
             Episodes
           </Button>
-          <Button component={Link} to="/locations" variant={buttonVariants.locations} onClick={onButtonSelected}>
+          <Button
+            component={Link}
+            to="/locations"
+            variant={buttonVariants.locations}
+            onClick={onButtonSelected}
+          >
             Locations
           </Button>
-          <Button component={Link} to="/watch-list" variant={buttonVariants['my watch list']} onClick={onButtonSelected}>
+          <Button
+            component={Link}
+            to="/watch-list"
+            variant={buttonVariants["watch-list"]}
+            onClick={onButtonSelected}
+          >
             My watch list
           </Button>
         </Stack>
