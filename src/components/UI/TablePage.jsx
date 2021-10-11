@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import { visuallyHidden } from "@material-ui/utils";
 
 import { stableSort, getComparator } from "../../utils/pages";
+import { Divider } from "@material-ui/core";
 
 function EnhancedTableHead(props) {
   const { order, orderBy, onRequestSort, headCells, StyledTableCell } = props;
@@ -40,6 +41,7 @@ function EnhancedTableHead(props) {
                   {order === "desc" ? "sorted descending" : "sorted ascending"}
                 </Box>
               ) : null}
+            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
             </TableSortLabel>
           </StyledTableCell>
         ))}
