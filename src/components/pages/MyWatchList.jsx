@@ -15,7 +15,7 @@ const MyWatchList = () => {
   const [checked, setChecked] = useState([]);
 
   const addListItem = (userInput) => {
-    if (userInput.trim().length) {
+    if (userInput?.trim().length) {
       const newItem = {
         id: Math.random().toString(36).substr(2, 9),
         item: userInput,
